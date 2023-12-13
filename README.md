@@ -1,10 +1,7 @@
-# plasmidInteractions: AI Interface for Plasmid Design
+# plasmidInteract: AI Interface for Plasmid Design
 
 # Introduction and Goals
 
-[Plasmid Interactions on GitHub](https://github.com/GDAmitha/plasmidInteractions)
-
-[GeneSeq Data Repository on Colab](http://tinyurl.com/GeneseqDataRepColab)
 
 The design of plasmids is critical in biological research, including gene therapy, protein expression, and synthetic biology. Current design methods are often laborious and error-prone, especially for complex projects. This project aims to develop innovative tools to streamline the plasmid design process, using AI to manage the complexity of large data sets, as demonstrated in CRISPR systems and Pf Ago/AREs research.
 
@@ -41,10 +38,27 @@ Biopython will be used for various representations, with custom algorithms for m
 
 We will integrate various tools for internal plasmid design:
 
-- Benchling: Cloud-based platform for sequence editing and molecular biology tools.
-- CRISPOR: Designs CRISPR guide RNAs and analyzes off-target effects.
-- BLAST: Compares an input sequence against a database of sequences.
-- ... and many more.
+| Tool | Description |
+|------|-------------|
+| Benchling | Cloud-based platform for sequence editing and molecular biology tools. |
+| CRISPOR | Designs CRISPR guide RNAs and analyzes off-target effects. |
+| BLAST | Compares an input sequence against a database of sequences. |
+| CHOPCHOP | Designs CRISPR guide RNAs and analyzes off-target effects. |
+| Clustal Omega | Performs multiple sequence alignments. |
+| Geneious | Provides graphical representation of DNA sequences, annotations, and modifications. |
+| MUSCLE | Performs multiple sequence alignments. |
+| Artemis | Genome browser and annotation tool. |
+| NEBcutter | Identifies restriction enzyme sites. |
+| APE (A Plasmid Editor) | Edits and analyzes plasmid maps. |
+| Webcutter | Analyzes restriction enzyme sites. |
+| Gene Construction Kit | Manipulates DNA sequences and constructs plasmids graphically. |
+| RestrictionMapper | Analyzes restriction enzyme sites. |
+| Entrez Programming Utilities (E-utilities) | Searches and retrieves data from NCBI databases. |
+| Primer3 | Designs primers for PCR and other experiments. |
+| UniProt API | Accesses protein sequence and functional information. |
+| OligoCalc | Calculates properties of oligonucleotide sequences. |
+| SnapGene | Visualizes and edits DNA sequences, simulates cloning. |
+
 
 ### 3. Machine Learning Algorithms for Intelligent Plasmid Design
 
@@ -52,11 +66,19 @@ The automated design process will begin with user input, parsed using LLM integr
 
 #### Algorithms
 
-- Sequence & Property Prediction: CNN, RNN/LSTM
-- CRISPR gRNA Design & Efficiency Prediction: Deep Learning Models
-- Genetic Design Optimization: Genetic Algorithms (GA), Simulated Annealing (SA)
-- Data Integration & Feature Extraction: PCA, t-SNE, Random Forests
-- Experimental Outcome Prediction: Regression Models, NLP Algorithms
+| Category                          | Algorithm/Method                | Description                                           |
+|-----------------------------------|---------------------------------|-------------------------------------------------------|
+| **Sequence & Property Prediction**| CNN                             | Pattern recognition, motif identification, DNA-protein interaction prediction |
+|                                   | RNN/LSTM                        | Predict effects of sequence alterations              |
+| **CRISPR gRNA Design & Efficiency Prediction** | Deep Learning Models          | Predict gRNA efficiency and specificity              |
+|                                   | Off-target Prediction Models    | Predict potential off-target sites of CRISPR editing |
+| **Genetic Design Optimization**   | Genetic Algorithms (GA)         | Iteratively improve genetic sequences                |
+|                                   | Simulated Annealing (SA)        | Find optimal design in large search spaces           |
+| **Data Integration & Feature Extraction** | PCA, t-SNE                      | Reduce data complexity while retaining features      |
+|                                   | Random Forests, Gradient Boosting Machines | Feature importance analysis & classification    |
+| **Experimental Outcome Prediction**   | Regression Models               | Predict continuous or categorical outcomes           |
+|                                   | Natural Language Processing (NLP) Algorithms | Sequence-to-sequence models for specific tasks     |
+
 
 ## Conclusion
 
