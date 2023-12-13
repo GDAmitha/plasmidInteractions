@@ -76,7 +76,7 @@ We will integrate various tools for internal plasmid design:
 
 ### 3. Machine Learning Algorithms for Intelligent Plasmid Design
 
-The automated design process will begin with user input, parsed using LLM integration. Specifications will be mapped to our database for optimal gene design.
+The automated design process begins with a user input, which is then parsed using integration with an LLM. Key specifications are extracted and inputted to our designer algorithm. These specifications are mapped to our database of genes and corresponding features. The below algorithms will be implemented to determine an optimal gene design.
 
 #### Algorithms
 
@@ -93,7 +93,131 @@ The automated design process will begin with user input, parsed using LLM integr
 | **Experimental Outcome Prediction**   | Regression Models               | Predict continuous or categorical outcomes           |
 |                                   | Natural Language Processing (NLP) Algorithms | Sequence-to-sequence models for specific tasks     |
 
+### Overall Specification: Putting it all together.
+
+#### 1. Function Details:
+- **Function Name**: DesignCRISPRPlasmid
+- **Function Description**: This function designs a CRISPR-based plasmid using user-provided specifications, including DNA sequences, target sites, and desired genetic modifications.
+
+#### 2. Approach and Algorithm:
+- **Approach**:
+  - **Dependent Functions**:
+    - query handling
+    - DNA sequence analysis
+    - CRISPR target prediction
+    - plasmid visualization
+  - **Function Interaction**: Interacts with these functions to validate inputs, generate CRISPR targets, and construct plasmid maps.
+  - **Data Flow**: User inputs are passed to an LLM integration function; outputs from these are two-fold: the genetic data we want to deal with, and the actions we want to take with those genetic objects.
+  - **Error Handling**: Checks for invalid logic in the message or incompatible genetic elements.
+  - **Required State**: Assumes latest versions of the above mentioned functions for accurate analysis.
+- **Algorithm**:
+  1. Validate user inputs for sequence correctness.
+  2. Use sequence analysis to identify potential CRISPR target sites.
+  3. Design guide RNAs for specified targets.
+  4. Simulate the insertion of CRISPR components into the plasmid.
+  5. Visualize the final plasmid construct.
+
+#### 3. Input Specification:
+- Any string of text that can be processed by an LLM.
+  - query handler (which integrates an LLM) extracts the following information:
+    - **Name**: UserInputData
+    - **Type**: Structured Object (containing strings, integers, etc.)
+    - **Description**: Contains all user-provided data, such as DNA sequences, target locations, and desired modifications.
+    - **Constraints**: Sequences must be valid nucleotide sequences; targets should be within the provided sequences.
+
+#### 4. Output Specification:
+- **Type**: Plasmid Object
+- **Description**: Contains the designed plasmid map, CRISPR target sites, guide RNA sequences, a list of features, and a summary of the design.
+
+#### 5. Error Handling and Validation:
+- Invalid sequences or incompatible targets trigger an error with a descriptive message.
+- Input validation checks for correct sequence formats and logical consistency in the requested modifications.
+
+#### 6. Examples and Test Cases:
+
+##### A. Typical Scenario
+
+- **Input**:
+  - 'Given the sequence ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG, can you add a GFP at the 12th base?'
+- **query-result**: 
+  - DNA sequence: `ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`
+  - Target site: Position 10-15
+  - Genetic modification: Insertion of a GFP gene at position 12
+- **Expected Output**:
+  - Plasmid map: Shows the vector with the GFP gene inserted at the specified position.
+  - Guide RNA: Sequence targeting the specified site.
+  - Edited sequence: The sequence showing the GFP gene successfully inserted.
+  - Message: "Plasmid design successful. GFP gene inserted at position 12."
+
+##### B. Edge Case: Overlapping Target Sites
+- **Input**:
+  - 'Given the sequence ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG, can you remove and the 6 base x (TTGTAA) feature and add GFP at the 12th base?'
+- **query-result**:
+  - DNA sequence: `ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`
+  - Target sites: Position 8-13 and 10-15 overlapping
+  - Genetic modification: Deletion at position 8-13 and insertion at position 10-15
+- **Expected Output**:
+  - Error message: "Overlapping target sites detected. Please revise target positions."
+  - Suggestion: "Consider separate modifications or adjusting target ranges to avoid overlap."
+
+##### C. Edge Case: Multiple Editing Requests
+- **Input**:
+  - 'Given the sequence ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG, can you add x, at a, remove y at b, and substitute z at c?'
+- **query-result**:
+  - DNA sequence: `ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`
+  - Multiple targets: Positions 5-10, 15-20, 25-30
+  - Genetic modifications: Insertion, deletion, and substitution at the respective targets
+- **Expected Output**:
+  - Plasmid map: Shows the vector with all requested modifications.
+  - Guide RNAs: Sequences for each target site.
+  - Edited sequence: The sequence showing all modifications.
+  - Message: "Multiple edits applied. Review the plasmid map for accuracy."
+
+##### D. Error Scenario: Invalid DNA Sequence
+- **Input**:
+  - 'Given the sequence ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG, can you add x at y?'
+- **query-result**:
+  - DNA sequence: `ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG` (invalid nucleotides 'X')
+  - Target site: Position 10-15
+  - Genetic modification: Insertion of a sequence
+- **Expected Output**:
+  - Confirmation message: "Invalid DNA sequence detected. Please compare with our closest sequence and confirm we can proceed?"
+
+##### E. Error Scenario: Incompatible Modification Request
+- **Input**:
+  - 'Given the sequence ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG, can you insert the gene 'ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG' to result in a 50 basepair sequence?'
+- **query-result**:
+  - DNA sequence: `ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`
+  - Target site: Position 5-10
+  - Genetic modification: Insertion of a large gene fragment that exceeds vector capacity
+- **Expected Output**:
+  - Error message: "Requested modification is incompatible with vector capacity."
+  - Suggestion: "Consider using a larger vector or reducing the size of the insert."
+
+
+## Results
+
+###GeneBank Parsing iPython WorkFlow: 
+First iteration of the GeneBank Parsing Function took more than 15 minutes to parse through 5 genebank files. This is not ideal, however this time would be an overhead cost, as demonstrated in the efficiency testing of the GeneBank Parsing notebook. The goal is to build a locally accessible list of genes that can be accessed throughout the rest of the pipeline. At the end the data was a large dictionary that captured the key features of each sequence, stored the location of the features in the sequence, and saved a copy of the full sequence. Though this is an initial first step towards implementation, This workflow allows us to build a database of sequences that can be accessed by an LLM down the line.
+
+####The workflow included: 
+1.) A function that takes a given genebank file that has been read by SeqIO and parses through it, collecting different respresentations of the sequence.
+2.) A function to download and decompress the file directly from the genebank website.
+3.) A function to parse through files and store them in a dictionary.
+4.) A function to aggregate a specific set of features we want, like CDS and gene sequences.
+5.) A function to map this locations to sequence subsets.
+6.) 3 tests to analyze the performance of these algorithms. The final functions are included, which are almost instantanerous.
+
+####The workflow yet-to-be-implemented:
+Within genebank parser, we still require the functionality of mapping these genes with their functionality. Once this is acheived, then genebank parser is relatively complete.
+
 
 ## Conclusion
 
-Integrating LLMs for automated Plasmid Design requires a combination of computational power and biological expertise. Our goal is to develop a large-scale AI platform for gene editing technologies, currently focusing on optimizing gene sequence representation for synthetic biology applications.
+There is still a lot that needs to be implemented before a working prototype can be achievd. Development of this project can be broken down to the 3 overarching steps outlined above, and would provide a substantive contribution to the development of a large-scale AI platform for gene editing technologies. 
+
+The implemented code in GeneBank Parser creates an LLM accessible genetic data structure focuses on optimizing the representation of a given gene sequence from GeneBank files. This representation has several applications within the synthetic biology landscape - including curating more effective libraries of sequences and feature analysis - in addition to its use in an eventual AI interface for Plasmid Design. Researchers would be able to use the GeneBank Parser workflow to create libraries of their own experimental data to fine-tine future models to refelct their past data.
+
+With the completion of Genebank parser, the next steps would be implementing functions for integration with the various bioinformatics tools listed above for the various actions and utilize machine learning algorithms to consistently optimize for the best plasmid design. Finally, a query handler with OpenAI API integration needs to be written. This would allow for all the components of the end goal PlasmidDesigner Function to be reached.
+
+Integrating LLMs to automate Plasmid Design requires a complex combination of computational power and a thorough understanding of the biological representation of our data. 
