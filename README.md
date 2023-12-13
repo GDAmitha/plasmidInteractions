@@ -96,7 +96,7 @@ The automated design process begins with a user input, which is then parsed usin
 ### Overall Specification: Putting it all together.
 
 #### 1. Function Details:
-- **Function Name**: DesignCRISPRPlasmid
+- **Function Name**: plasmidInteract
 - **Function Description**: This function designs a CRISPR-based plasmid using user-provided specifications, including DNA sequences, target sites, and desired genetic modifications.
 
 #### 2. Approach and Algorithm:
@@ -218,6 +218,6 @@ There is still a lot that needs to be implemented before a working prototype can
 
 The implemented code in GeneBank Parser creates an LLM accessible genetic data structure focuses on optimizing the representation of a given gene sequence from GeneBank files. This representation has several applications within the synthetic biology landscape - including curating more effective libraries of sequences and feature analysis - in addition to its use in an eventual AI interface for Plasmid Design. Researchers would be able to use the GeneBank Parser workflow to create libraries of their own experimental data to fine-tine future models to refelct their past data.
 
-With the completion of Genebank parser, the next steps would be implementing functions for integration with the various bioinformatics tools listed above for the various actions and utilize machine learning algorithms to consistently optimize for the best plasmid design. Finally, a query handler with OpenAI API integration needs to be written. This would allow for all the components of the end goal PlasmidDesigner Function to be reached.
+With the completion of Genebank parser, the next steps would be implementing functions for integration with the various bioinformatics tools listed above for the various actions and utilize machine learning algorithms to consistently optimize for the best plasmid design. Finally, a query handler with OpenAI API integration needs to be written. This would account for all the dependent components of the end goal PlasmidInteract Function, hence allowing for its creation.
 
 Integrating LLMs to automate Plasmid Design requires a complex combination of computational power and a thorough understanding of the biological representation of our data. 
