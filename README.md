@@ -151,7 +151,7 @@ The automated design process begins with a user input, which is then parsed usin
 
 ##### B. Edge Case: Overlapping Target Sites
 - **Input**:
-  - 'Given the sequence ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG, can you remove and the 6 base x (TTGTAA) feature and add GFP at the 12th base?'
+  - 'Given the sequence ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG, can you remove the 6 base x (TTGTAA) feature and add GFP at the 12th base?'
 - **query-result**:
   - DNA sequence: `ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`
   - Target sites: Position 8-13 and 10-15 overlapping
@@ -185,7 +185,7 @@ The automated design process begins with a user input, which is then parsed usin
 
 ##### E. Error Scenario: Incompatible Modification Request
 - **Input**:
-  - 'Given the sequence ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG, can you insert the gene 'ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG' to result in a 50 basepair sequence?'
+  - 'Given the sequence ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG, can you insert the gene 'ATGXCCATTXTAATGGGCCGCTGAAXGGGTGCCCGATAG' to result in a 50 base pair sequence?'
 - **query-result**:
   - DNA sequence: `ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`
   - Target site: Position 5-10
@@ -214,10 +214,10 @@ Within genebank parser, we still require the functionality of mapping these gene
 
 ## Conclusion
 
-There is still a lot that needs to be implemented before a working prototype can be achievd. Development of this project can be broken down to the 3 overarching steps outlined above, and would provide a substantive contribution to the development of a large-scale AI platform for gene editing technologies. 
+There is still a lot that needs to be implemented before a working prototype can be achieved. Development of this project can be broken down to the 3 overarching steps outlined above, and would provide a substantive contribution to the development of a large-scale AI platform for gene editing technologies. 
 
-The implemented code in GeneBank Parser creates an LLM accessible genetic data structure focuses on optimizing the representation of a given gene sequence from GeneBank files. This representation has several applications within the synthetic biology landscape - including curating more effective libraries of sequences and feature analysis - in addition to its use in an eventual AI interface for Plasmid Design. Researchers would be able to use the GeneBank Parser workflow to create libraries of their own experimental data to fine-tine future models to refelct their past data.
+The code implemented in GeneBank Parser creates an LLM accessible genetic data structure focused on optimizing the representation of a given gene sequence from GeneBank files. This representation has several applications within the synthetic biology landscape - including curating more effective libraries of sequences and feature analysis - in addition to its use in an eventual AI interface for Plasmid Design. Researchers would be able to use the GeneBank Parser workflow to create libraries of their own experimental data to fine-tune future models to reflect their past data.
 
-With the completion of Genebank parser, the next steps would be implementing functions for integration with the various bioinformatics tools listed above for the various actions and utilize machine learning algorithms to consistently optimize for the best plasmid design. Finally, a query handler with OpenAI API integration needs to be written. This would account for all the dependent components of the end goal PlasmidInteract Function, hence allowing for its creation.
+With the completion of Genbank parser, the next steps would be implementing functions for integration with the various bioinformatics tools listed above for the various actions and utilize machine learning algorithms to consistently optimize for the best plasmid design. Finally, a query handler with OpenAI API integration needs to be written. This would account for all the dependent components of the end goal PlasmidInteract Function, hence allowing for its creation.
 
-Integrating LLMs to automate Plasmid Design requires a complex combination of computational power and a thorough understanding of the biological representation of our data. 
+Integrating LLMs to automate Plasmid Design requires a complex combination of computational power and a thorough understanding of the biological representation of our data.
