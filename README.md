@@ -197,18 +197,18 @@ The automated design process begins with a user input, which is then parsed usin
 
 ## Results
 
-###GeneBank Parsing iPython WorkFlow: 
+### GeneBank Parsing iPython Workflow
 First iteration of the GeneBank Parsing Function took more than 15 minutes to parse through 5 genebank files. This is not ideal, however this time would be an overhead cost, as demonstrated in the efficiency testing of the GeneBank Parsing notebook. The goal is to build a locally accessible list of genes that can be accessed throughout the rest of the pipeline. At the end the data was a large dictionary that captured the key features of each sequence, stored the location of the features in the sequence, and saved a copy of the full sequence. Though this is an initial first step towards implementation, This workflow allows us to build a database of sequences that can be accessed by an LLM down the line.
 
-###The workflow included: 
-1.) A function that takes a given genebank file that has been read by SeqIO and parses through it, collecting different respresentations of the sequence.
-2.) A function to download and decompress the file directly from the genebank website.
-3.) A function to parse through files and store them in a dictionary.
-4.) A function to aggregate a specific set of features we want, like CDS and gene sequences.
-5.) A function to map this locations to sequence subsets.
-6.) 3 tests to analyze the performance of these algorithms. The final functions are included, which are almost instantanerous.
+### The Workflow Included
+1. A function that takes a given genebank file that has been read by SeqIO and parses through it, collecting different representations of the sequence.
+2. A function to download and decompress the file directly from the genebank website.
+3. A function to parse through files and store them in a dictionary.
+4. A function to aggregate a specific set of features we want, like CDS and gene sequences.
+5. A function to map these locations to sequence subsets.
+6. Three tests to analyze the performance of these algorithms. The final functions are included, which are almost instantaneous.
 
-###The workflow yet-to-be-implemented:
+### The Workflow Yet-To-Be-Implemented
 Within genebank parser, we still require the functionality of mapping these genes with their functionality. Once this is acheived, then genebank parser is relatively complete.
 
 
